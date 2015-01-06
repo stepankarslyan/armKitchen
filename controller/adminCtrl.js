@@ -3,8 +3,8 @@ var producteService = require("../service/producteService");
 module.exports = {
 	
 	register: function(app) {
-	    app.get('/admin/dish/:id', this.getById);
-	    app.get('/admin/dish/', this.get);
+	  app.get('/admin/dish/:id', this.getById);
+	  app.get('/admin/dish/', this.get);
 		app.post('/admin/dish', this.save);
 		app.put('/admin/dish', this.update);
 		app.delete('/admin/dish', this.delete);

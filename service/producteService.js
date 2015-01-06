@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-mongoose.connect('mongodb://' + process.env.IP + '/armKitchen');
+mongoose.connect('mongodb://localhost/armKitchen');
 
 var dishSchema = mongoose.Schema({
     category: String,
