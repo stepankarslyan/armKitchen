@@ -18,5 +18,5 @@ _.each(controllers, function(controller) {
 });
 
 
-app.listen(process.env.PORT, process.env.IP);
-console.log("server is started ");
+app.listen(3030);
+console.log("server is started on http://localhost:3030");
