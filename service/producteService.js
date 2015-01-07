@@ -18,14 +18,14 @@ module.exports = {
 	getById: function(id, done) {
 		Dish.findById(id, function(error, dbDish) {
 			if(!error) done(dbDish);
-			else console.error(error);
+			else console.error('error', error);
 		});
 	},
 	
 	get: function(category, done) {
 		Dish.find({ category: category}, function (error, dbDishes) {
 			if(!error) done(dbDishes);
-			else console.error(error);
+			else console.error('error', error);
 		});
 	},
 	
@@ -40,15 +40,15 @@ module.exports = {
 	
 	update: function(update, done) {
 		
-		Dish.findByIdAndUpdate(update._id, update, function(error) {
+		Dish.findByIdAndUpdate(update._id, update, {upsert: true}, function(error) {
 			if(!error) done();
 			else console.error(error);
 		});
 	},
 	
 	delete: function(id, done) {
-		Dish.findByIdAndRemove(id, function(error) {
-			if(!error) done();
+		Dish.findByIdAndRemove(id, function(error, deletedDish) {
+			if(!error) done(deletedDish);
 			else console.error(error);
 		});
 	}

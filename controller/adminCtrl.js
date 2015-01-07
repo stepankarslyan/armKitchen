@@ -7,23 +7,30 @@ module.exports = {
 	  app.get('/admin/dish/', this.get);
 		app.post('/admin/dish', this.save);
 		app.put('/admin/dish', this.update);
-		app.delete('/admin/dish', this.delete);
+		app.delete('/admin/dish/:id', this.delete);
 	},
 	
 	getById: function(req, res) {
-	    var id = req.params.id;
-	    
-		producteService.getById(id), function(dish) {
-		    res.send(JSON.stringify(dish));
-		};
+		var id = req.params.id;
+
+		producteService.getById(id, function(dish) {
+			if(dish) {
+				console.log('getting dish', dish._id);
+				res.send(JSON.stringify(dish));
+			}
+			else {
+				console.log('not found');
+				res.status(404).send();
+			}
+		});
 	},
 	
 	get: function(req, res) {
-		var caregory = req.body.caregory;
-		console.log(caregory);
+		var caregory = req.query.category;
 		
 		producteService.get(caregory, function(dishes) {
-		    res.send(JSON.stringify(dishes));
+			console.log('getting dishes', dishes.length);
+			res.send(JSON.stringify(dishes));
 		});
 	},
 	
@@ -31,8 +38,8 @@ module.exports = {
 		var dish = req.body;
 		
 		producteService.save(dish, function() {
-			console.log('done');
-		     res.status(200).send();
+			console.log('saved');
+		  res.status(204).send();
 		});
 	},
 	
@@ -40,15 +47,23 @@ module.exports = {
 	    var update = req.body;
 		
 		producteService.update(update, function() {
-		    res.status(200).send();
+		  console.log('updated');
+		  res.status(204).send();
 		});
 	},
 	
 	delete: function(req, res) {
-		var id = req.query.id;
+		var id = req.params.id;
 			
-		producteService.delete(id, function(){
-		    res.status(200).send();
+		producteService.delete(id, function(deletedDish){
+		  if(deletedDish) {
+				console.log('deleted');
+				res.status(204).send();
+		  }
+		  else {
+		  	console.log('not found');
+		  	res.status(404).send();
+		  }
 		});
 	}
 	

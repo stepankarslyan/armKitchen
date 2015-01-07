@@ -8,20 +8,27 @@ module.exports = {
 	},
 	
 	getById: function(req, res) {
-	    var id = req.params.id;
-	    
-		producteService.getById(id), function(dish) {
-		    res.send(JSON.stringify(dish));
-		};
+		var id = req.params.id;
+
+		producteService.getById(id, function(dish) {
+			if(dish) {
+				console.log('getting dish', dish._id);
+				res.send(JSON.stringify(dish));
+			}
+			else {
+				console.log('not found');
+				res.status(404).send();
+			}
+		});
 	},
 	
 	get: function(req, res) {
-		var caregory = req.query.caregory;
-		console.log(caregory);
+		var caregory = req.query.category;
 		
 		producteService.get(caregory, function(dishes) {
-		    res.send(JSON.stringify(dishes));
+			console.log('getting dishes', dishes.length);
+			res.send(JSON.stringify(dishes));
 		});
-	}
+	},
 	
 };
