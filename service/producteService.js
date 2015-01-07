@@ -1,13 +1,13 @@
 var mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/armKitchen');
+//mongoose.connect('mongodb://localhost/armKitchen');
 
 var dishSchema = mongoose.Schema({
     category: String,
     title: String,
     description: String,
     img: String,
-    recipes: String,
+    ingredients: String,
     preparationMethod: String
 });
 

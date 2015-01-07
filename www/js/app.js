@@ -11,6 +11,10 @@ angular.module("MyApp", ['ngRoute'])
         templateUrl: 'html/details.html',
         controller: 'DetailCtrl'
       }).
+      when('/details/:id', {
+        templateUrl: 'html/details.html',
+        controller: 'DetailCtrl'
+      }).
       otherwise({
         redirectTo: '/details'
       });

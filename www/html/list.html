@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+		<lable for="select">Select category:</lable>
+		<select id="select" ng-model="currentCategory">
+			<option ng-repeat="category in dishCategories">{{category}}</option>
+		</select>
+</div>
+  <!-- Table -->
+  <table class="table table-striped">
+    <tr>
+    	<td>
+    		<strong>Image</strong>
+    	</td>
+    	<td>
+    		<strong>Title</strong>
+    	</td>
+    	<td>
+    		<strong class="pull-right">Action</strong>
+    	</td>
+    </tr>
+    <tr ng-repeat="dish in categoryContent">
+    	<td>
+			  <img width="60px" height="60px" alt="no photo" src="{{dish.img}}">
+    	</td>
+    	<td>
+    		{{dish.title}}
+    	</td>
+    	<td>
+    		<div class="btn-group pull-right" role="group" aria-label="...">
+					<button ng-click="edit(dish)"type="button" class="btn btn-primary">Edit</button>
+					<button ng-click="remove(dish)"type="button" class="btn btn-danger">remove</button>
+				</div>
+    	</td>
+    </tr>
+  </table>
+</div>
